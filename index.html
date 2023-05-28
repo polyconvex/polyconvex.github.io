@@ -44,7 +44,7 @@
         }
 
         .link {
-            margin: 20px 10px;
+            margin: 20px 40px;
             font-weight: bold;
             text-decoration: none;
             color: #A15737;
@@ -112,12 +112,39 @@
           }
         }
 
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 800px) {
 
             .links-container {
                 flex-direction: column;
                 text-align: center;
             }
+
+            .about-txt {
+                font-size: 24px;
+            }
+
+            .button-container {
+                top: 40px;
+            }            
+
+            .button {
+                width: 100px;
+            }
+
+            .links-container {
+                bottom: 40px;
+            }   
+
+            .logo-container {
+                position: absolute;
+                width: 120px;
+                top: 40px;
+                left: 20px;
+            }
+
+            .link {
+                margin: 10px 10px;
+            } 
 
         }
     </style>
@@ -125,8 +152,6 @@
 <body>
 
 <article class="wrapper"></article>
-  
-
 
     <div class="main-container">
     <div class="button-container">
