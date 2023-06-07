@@ -185,6 +185,10 @@
             max-width: 600px;
         }
 
+        .logosvgindex {
+            max-width: 600px;
+        }        
+
         .links-container {
             position: absolute;
             bottom: 80px;
@@ -298,12 +302,16 @@
                 width: 120px;
                 height: auto;
             }
+            .logosvgindex {
+                width: 84%;
+                height: auto;
+            }            
             .about-txt {
-                font-size: 22px;
+                font-size: 21px;
             }                       
 
             .link {
-                margin: 10px 10px;
+                margin: 5px 10px;
                 font-size: 14px;
             } 
 
