@@ -559,7 +559,6 @@ input, select, textarea {
 		cursor: pointer;
 		display: inline-block;
 		color: #111;
-		
 /*		height: 2.75em;*/
 		line-height: 2.75em;
 /*		min-width: 9.25em;*/
@@ -1542,9 +1541,9 @@ input, select, textarea {
 			}
 	
 
-	.console-outer {
-		max-height: 340px;
-	}
+				.console-outer {
+					max-height: 340px;
+				}
 
 				#main > .main > .image.main:first-child {
 					margin: 1em;
@@ -1682,7 +1681,7 @@ input, select, textarea {
 		max-width: 100%;
 		margin: 0 auto;
 		background-image: url("images/BG.jpg");
-		 animation: scroll 3000s linear infinite;
+		 animation: scroll 2000s linear infinite;
 		background-size: cover;
 		background-position: 0% 0%;
 	}
