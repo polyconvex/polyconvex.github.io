@@ -21,6 +21,9 @@
   });
 })(jQuery);
 
+
+// GSAP slot machine credit: https://codepen.io/fionchadd
+
 // select 3 random initial values between -360 and 360, snapping in increments of 36 so it doesn't stop between panels
 var random1 = gsap.utils.random(-360, 360, 36);
 var random2 = gsap.utils.random(-360, 360, 36);
@@ -92,7 +95,7 @@ function finishScroll() {
             "Tsekkaa pätkä 1.9.2023 julkaistavasta biisistä!";
           break;
         case "Seppä":
-          winOutput("nZUoWA5J9iA");
+          // winOutput("nZUoWA5J9iA");
           description.innerHTML =
             "Onnittelut Seppä, taoit ittes lisäarvontaan! Laita screenshot tästä IG storyyn ja tagaa @kerrostalomusic, niin pääset kokeilemaan onneasi lisäarvonnassa!";
           break;
