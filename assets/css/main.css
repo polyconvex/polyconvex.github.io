@@ -1689,7 +1689,7 @@ input, select, textarea {
 		max-width: 100%;
 		margin: 0 auto;
 		background-image: url("images/BG.jpg");
-		animation: scroll 2000s linear infinite;
+		animation: scroll 1500s linear infinite;
 		background-size: cover;
 		background-position: 0% 0%;
 	}
