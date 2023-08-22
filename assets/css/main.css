@@ -27,9 +27,9 @@ small {
 }
 
 .logo-bottom {
-  margin: 40px auto;
+  margin: 20px auto !important;
   width: 100%;
-  max-width: 480px;
+  max-width: 250px;
   position: relative;
 }
 
