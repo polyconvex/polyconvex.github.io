@@ -13,16 +13,24 @@ body {
 
 small {
     padding: 20px !important;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
+    color: #111;
+    background-color: rgba(255, 255, 255, 0.69);
+        line-height: 1.5;
     border-radius: 10px;
     margin: 20px auto !important;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 14px !important;
-    font-family: sans-serif;
     max-width: 464px;
     display: block;
     width: 100%;
+    text-shadow: 1px 1px 6px #ddd;
+}
+
+.logo-bottom {
+	margin: 40px auto;
+	width: 100%;
+	max-width: 480px;
+	position: relative;
 }
 
 #desc {
@@ -1681,7 +1689,7 @@ input, select, textarea {
 		max-width: 100%;
 		margin: 0 auto;
 		background-image: url("images/BG.jpg");
-		 animation: scroll 2000s linear infinite;
+		animation: scroll 2000s linear infinite;
 		background-size: cover;
 		background-position: 0% 0%;
 	}
