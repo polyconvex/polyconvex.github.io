@@ -95,7 +95,7 @@ function finishScroll() {
             "Tsekkaa pätkä 1.9.2023 julkaistavasta biisistä!";
           break;
         case "Seppä":
-          // winOutput("nZUoWA5J9iA");
+          winOutput("", "Seppä");
           description.innerHTML =
             "Onnittelut Seppä, taoit ittes lisäarvontaan! Laita screenshot tästä IG storyyn ja tagaa @kerrostalomusic, niin pääset kokeilemaan onneasi lisäarvonnassa!";
           break;
@@ -207,13 +207,22 @@ function winOutput(videoId, dataContent) {
     return;
   }
 
+
+    if (dataContent === "Seppä") {
+    $(".video-container").addClass("hidden");
+  }   
+
+
   const modal = document.querySelector(".modal");
   const closeModal = modal.querySelector(".close");
-  const youtubeEmbed = modal.querySelector("#youtube-embed");
 
+
+
+  const youtubeEmbed = modal.querySelector("#youtube-embed");
   // Set the YouTube video embed URL based on the videoId parameter
   const embedUrl = `https://www.youtube.com/embed/${videoId}`;
   youtubeEmbed.src = embedUrl;
+
 
   // Open the modal
   modal.style.display = "block";
@@ -231,6 +240,10 @@ function winOutput(videoId, dataContent) {
       youtubeEmbed.src = ""; // Reset the embed URL
     }
   };
+
+
+
+
 }
 
 // on click spin the wheels
