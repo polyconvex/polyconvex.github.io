@@ -38,9 +38,7 @@ var options = {
   isanimate: true,
 };
 
-var gui = new dat.GUI({ autoPlace: false });
-gui.domElement.id = 'gui';
-gui_container.appendChild(gui.domElement);
+var gui = new dat.GUI();
 
 // var bloom = gui.addFolder("Bloom");
 // bloom.add(options, "bloomStrength", 0.0, 5.0).name("bloomStrength").listen();
