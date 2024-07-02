@@ -349,6 +349,7 @@ scene.add(ambientLight);
   renderer.outputEncoding = THREE.sRGBEncoding;
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableZoom = false;
+  controls.enablePan = false;
   controls.update();
   document.getElementById("world").appendChild(renderer.domElement);
   //
