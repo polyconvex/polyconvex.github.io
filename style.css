@@ -24,6 +24,13 @@ canvas {
  top: 0;
 }
 
+.dg.a {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
 .info-button {
       font-family: "Orbitron", sans-serif;
       font-optical-sizing: auto;
