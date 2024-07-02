@@ -1,365 +1,172 @@
-/*     body {
-            background-color: #DCC3B3;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: "Roboto", sans-serif;
-        }
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+/*       background: black; */
+/*       text-align: center; */
+      outline: none;
+    }
 
-        .main-container {
-            position: relative;
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+      body, html {
+      font-family: "Orbitron", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      cursor: grab;
+      }
 
-        .logo {
-            font-size: 120px;
-            color: #39312E;
-            font-weight: 600;
-            text-align: center;
-            text-transform: uppercase;
-            padding: 0 60px;
-        }
-        .logosvg {
-            max-width: 600px;
-        }
+    #world {
+      width: 100%;
+      height: 100vh;
+	background: black;
+    }
 
-        .links-container {
+canvas {
+ left: 0;
+ top: 0;
+position: absolute;
+}
+
+.info-button {
+      font-family: "Orbitron", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;      
+      cursor: pointer;
+      position: absolute;
+      bottom: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid #fff;
+      padding: 8px 32px;
+      min-width: 140px;
+      font-size: 14px;
+      border-radius: 100px;
+      background-color: transparent;
+      color: #FFF;  
+      transition: all .3s;
+}
+
+      a.vote {
+            font-size: 12px !important;    
+            cursor: pointer;
             position: absolute;
-            bottom: 100px;
-            display: flex;
-            justify-content: space-between;
-            margin-top: 100px;
-            width: 100%;
-
-        }
-
-        .link {
-            margin: 20px 40px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #A15737;
-            letter-spacing: 2px;
-        }
-
-        .button-container {
-            position: absolute;
-            top: 100px;
-            right: 0px;
-            display: flex;
-            justify-content: flex-end;
-            padding: 20px;
-        }
-
-        .button {
-            padding: 6px 15px;
-            border-radius: 8px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 100%;
             text-align: center;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            width: 160px;
+            font-size: 16px;
+            border-radius: 100px;
             background-color: transparent;
-            border: 3px solid #A2F4DE;
-            color: #A15737;
+            color: #FFF;  
+            transition: all .3s;
+            font-weight: 300;
             text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+      }
 
-        .button:hover {
-            background-color: #A2F4DE;
-            color: #DCC3B3;
-        }
+      span.underline {
+            text-decoration: underline;
+      }
 
 
-        .wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            animation: scroll 1000s linear infinite;
-            background: url("bg.png"),
-            #DCC3B3;
-            width: 100%;
-            height: 100vh;
-            perspective: 1000px;
-            perspective-origin: 50% 50%;
-        }
-
-        @keyframes scroll {
-          100% {
-            background-position: 0px -4000%;
-          }
-        }
-
-        
-        @media (prefers-reduced-motion) {
-          .wrapper {
-            animation: scroll 800s linear infinite;
-          }
-        }
-
-        @media (min-width: 670px) {
-          .title {
-            font-size: 5rem;
-          }
-        }
-
-        @media only screen and (max-width: 800px) {
-
-            .links-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .about-txt {
-                font-size: 24px;
-            }
-
-            .button-container {
-                top: 40px;
-            }            
-
-            .button {
-                width: 100px;
-            }
-
-            .links-container {
-                bottom: 60px;
-            }   
-
-            .logo-container {
-                position: absolute;
-                width: 120px;
-                top: 40px;
-                left: 20px;
-            }
-            .logo {
-                padding: 0 32px;
-                margin-bottom: 40px;
-            }
-        .logosvg {
-            width: 120px;
-        }            
-            .link {
-                margin: 10px 10px;
-            } 
-
-        } */
-
-       body {
-            background-color: #e5e5e5;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            font-family: "Roboto", sans-serif;
-        }
-
-        .main-container {
-            position: relative;
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .logo {
-            font-weight: 600;
-            text-align: center;
-            padding: 0 60px;
-        }
-        .logo-container {
+      h1.heading {
+            font-size: 14px !important;    
             position: absolute;
-            width: 180px;
-            top: 80px;
-            left: 0px;
-            display: flex;
-            justify-content: flex-end;
-            padding: 20px;
-        }        
-        .logosvg {
-            max-width: 600px;
-        }
-
-        .logosvgindex {
-            max-width: 600px;
-        }        
-
-        .links-container {
-            position: absolute;
-            bottom: 80px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;            
-            margin-top: 100px;
-            width: 100%;
-
-        }
-
-        .link {
-            margin: 20px 40px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #000;
-            letter-spacing: 2px;
-        }
-
-        .button-container {
-            position: absolute;
-            top: 80px;
-            right: 0px;
-            display: flex;
-            justify-content: flex-end;
-            padding: 20px;
-        }
-
-        .button {
-            padding: 6px 15px;
-            border-radius: 8px;
-            text-align: center;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            width: 160px;
+            top: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 140px;
+            font-size: 16px;
+            border-radius: 100px;
             background-color: transparent;
-            border: 3px solid #A2F4DE;
-            color: #000;
+            color: #FFF;  
+            transition: all .3s;
             text-decoration: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+      }
 
-        .button:hover {
-            background-color: #A2F4DE;
-            color: #000;
-        }
+      .info-button:hover {
+            background-color: #fff;
+            color: #191B25;      
+      }
 
-        .about-txt {
-            font-size: 40px;
-            color: #000;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+   h1 {
+      font-size: 16px;
+      letter-spacing: 1px;
+   }
+   p {
+      font-size: 12px;
+      line-height: 24px;
+      font-weight: 300;
+      letter-spacing: 1px;
+   }
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.33);
+      transition: opacity 200ms;
+      visibility: hidden;
+      opacity: 0;
+    }
+    .overlay .cancel {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: default;
+    }
+    .overlay:target {
+      visibility: visible;
+      opacity: 1;
+    }
+    
+    .popup {
+      cursor: default;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 6px;
+      background: #fff;
+      width: 90%;
+      max-width: 880px;
+      height: auto;
+      max-height: 90%;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.25);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-      .wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            animation: scroll 1000s linear infinite;
-            background: url("bg.png"),
-            #DCC3B3;
-            width: 100%;
-            height: 100vh;
-            perspective: 1000px;
-            perspective-origin: 50% 50%;
-        }
-
-        @keyframes scroll {
-          100% {
-            background-position: 0px -4000%;
-          }
-        }
-
-        /* Fallback if the operatring system prefers reduced motion*/
-        @media (prefers-reduced-motion) {
-          .wrapper {
-            animation: scroll 800s linear infinite;
-          }
-        }     
-
-        @media only screen and (max-width: 800px) {
-
-            .links-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .button-container {
-                top: 40px;
-            }            
-
-            .button {
-                width: 100px;
-            }
-
-            .links-container {
-                bottom: 60px;
-            }   
-
-            .logo-container {
-                position: absolute;
-                width: 120px;
-                top: 40px;
-                left: 20px;
-            }
-            .logo {
-                padding: 0 32px;
-                margin-bottom: 40px;
-            }
-            .logosvg {
-                width: 120px;
-                height: auto;
-            }
-            .logosvgindex {
-                width: 84%;
-                height: auto;
-            }            
-            .about-txt {
-                font-size: 21px;
-            }                       
-
-            .link {
-                margin: 5px 10px;
-                font-size: 14px;
-            } 
-
-        }
-
-        @media screen and (orientation:landscape) 
-            and (max-device-width: 880px) {
-            
-            .logosvg {
-                max-width: 250px;
-                width: 250px;
-            }
-
-            .logosvgindex {
-                max-width: 300px;
-            }               
-
-            .about-txt {
-                font-size: 16px;
-                max-width: 400px;
-            }
-
-            .button-container {
-                top: 20px;
-            }            
-
-            .button {
-                width: 100px;
-            }
-
-            .links-container {
-                bottom: 20px;
-            } 
-
-
-            .logo {
-                margin-bottom: 0px;
-            } 
-
-            .logo-container {
-                width: 120px;
-                top: 20px;
-            } 
-
-            .link {
-                font-size: 12px;
-                margin: 8px 24px;
-            }            
-
-            }  
-            
+    .popup h1 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #111;
+    }
+    .popup .close {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 20px;
+      right: 20px;
+      opacity: 0.8;
+      transition: all 200ms;
+      font-size: 20px;
+      font-weight: 400;
+      text-decoration: none;
+      color: #000;
+    }
+    .popup .close:hover {
+      opacity: 1;
+    }
+    .popup .content {
+      max-height: 520px;
+      overflow: auto;
+    }
+    .popup p {
+      margin: 0 0 1em;
+    }
+    .popup p:last-child {
+      margin: 0;
+    }
