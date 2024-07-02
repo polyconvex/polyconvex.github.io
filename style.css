@@ -25,6 +25,8 @@ canvas {
  left: 0;
  top: 0;
 position: absolute;
+width: 100% !important;
+height: 100vh !important;
 }
 
 .info-button {
@@ -177,7 +179,7 @@ position: absolute;
       top: 0;
       left: 50%;
     }
-    
+
     #gui{
       transform:translateX(-50%);
     }
