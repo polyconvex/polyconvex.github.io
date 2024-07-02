@@ -68,9 +68,7 @@ table {
 canvas {
  left: 0;
  top: 0;
-position: absolute;
-width: 100% !important;
-height: 100vh !important;
+  position: absolute;
 }
 
 .info-button {
