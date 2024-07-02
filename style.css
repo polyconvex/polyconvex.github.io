@@ -76,7 +76,8 @@ position: absolute;
             top: 56px;
             left: 50%;
             transform: translateX(-50%);
-            min-width: 140px;
+            min-width: 100%;
+            text-align: center;
             font-size: 16px;
             border-radius: 100px;
             background-color: transparent;
@@ -95,8 +96,8 @@ position: absolute;
       letter-spacing: 1px;
    }
    p {
-      font-size: 12px;
-      line-height: 24px;
+      font-size: 11px;
+      line-height: 20px;
       font-weight: 300;
       letter-spacing: 1px;
    }
@@ -125,7 +126,7 @@ position: absolute;
     .popup {
       cursor: default;
       margin: 0 auto;
-      padding: 30px;
+      padding: 26px;
       border-radius: 6px;
       background: #fff;
       width: 90%;
