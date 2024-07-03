@@ -775,10 +775,8 @@ function update() {
         }
         if (options.isanimate) {
           p.az = 0;
-          ctx.lineWidth = 2;
         } else {
           p.az = 0.01;
-          ctx.lineWidth = 0.1;
         }        
         if (
             p.sx - p.sr > bounds.x.max ||
