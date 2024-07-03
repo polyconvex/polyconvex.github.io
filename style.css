@@ -197,6 +197,11 @@ p {
   transform: translate(-50%, -50%);
 }
 
+.popup svg {
+
+  fill: #191b25;
+}
+
 .popup h1 {
   margin-top: 0;
   margin-bottom: 16px;

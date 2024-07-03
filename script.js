@@ -38,39 +38,9 @@ var options = {
   isanimate: true,
 };
 
-const button = document.getElementById('toggleButton');
-const svg1 = document.getElementById('svg1');
-const svg2 = document.getElementById('svg2');
 
-button.addEventListener('click', () => {
-    options.isanimate = !options.isanimate;
 
-    // Toggle SVGs based on the state of options.isanimate
-    if (options.isanimate) {
-        svg2.classList.add('hidden');
-        svg1.classList.remove('hidden');
-    } else {
-        svg2.classList.remove('hidden');
-        svg1.classList.add('hidden');
-    }
-});
 
-// var gui = new dat.GUI();
-
-// var bloom = gui.addFolder("Bloom");
-// bloom.add(options, "bloomStrength", 0.0, 5.0).name("bloomStrength").listen();
-// bloom.add(options, "bloomRadius", 0.1, 2.0).name("bloomRadius").listen();
-// bloom.open();
-// var color = gui.addFolder("Colors");
-// color.addColor(options, "color0").name("Border");
-// color.addColor(options, "color1").name("Base");
-// color.addColor(options, "color2").name("Eye");
-// color.open();
-// var isanim = gui.addFolder("Animate");
-// isanim.add(options, "isanimate").name("Animate");
-// isanim.open();
-
-// gui.close()
 
 const vert = `
   varying vec2 vUv;
@@ -683,3 +653,234 @@ function handleResize() {
 }
 window.addEventListener("load", init, false);
 window.addEventListener("resize", handleResize, false);
+
+
+//
+
+var canvas = document.createElement('canvas'),
+    ctx = canvas.getContext('2d'),
+    fl = 3000,
+    count = 200,
+    points = [],
+    startSpeed = -100,
+    tick = 0,
+    width,
+    height,
+    bounds,
+    vp,
+    mouse,
+    canvasOffset;
+
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function norm(val, min, max) {
+    return (val - min) / (max - min);
+}
+
+function resetPoint(p, init) {
+    p.z = init ? rand(0, bounds.z.max) : bounds.z.max;
+    p.x = rand(bounds.x.min, bounds.x.max) / (fl / (fl + p.z));
+    p.y = rand(bounds.y.min, bounds.y.max) / (fl / (fl + p.z));
+    p.ox = p.x;
+    p.oy = p.y;
+    p.oz = p.z;
+    p.vx = 0;
+    p.vy = 0;
+    p.vz = rand(-1, -6) + startSpeed;
+    p.ax = 0;
+    p.ay = 0;
+    p.az = 0;
+    p.s = 0;
+    p.sx = 0;
+    p.sy = 0;
+    p.os = p.s;
+    p.osx = p.sx;
+    p.osy = p.sy;
+    p.hue = rand(255, 255);
+    p.lightness = rand(70, 100);
+    p.alpha = 0;
+    return p;
+}
+
+function create() {
+    vp = {
+        x: width / 2,
+        y: height / 2
+    };
+    mouse = {
+        x: vp.x,
+        y: vp.y,
+        down: false
+    };
+    bounds = {
+        x: { min: -vp.x, max: width - vp.x },
+        y: { min: -vp.y, max: height - vp.y },
+        z: { min: -fl, max: 1000 }
+    };
+}
+
+function update() {
+    if (mouse.down) {
+        if (startSpeed > -30) {
+            startSpeed -= 0.1;
+        } else {
+            startSpeed = -30;
+        }
+    } else {
+        if (startSpeed < 0) {
+            startSpeed += 1;
+        } else {
+            startSpeed = 0;
+        }
+    }
+
+    if (!options.isanimate) {
+      if (startSpeed > -20) {
+          startSpeed -= 0.1;
+      } else {
+          startSpeed = -20;
+      }
+  } else {
+      if (startSpeed < 0) {
+          startSpeed += 1;
+      } else {
+          startSpeed = 0;
+      }
+  }    
+
+    vp.x += ((width / 2 - (mouse.x - width / 2)) - vp.x) * 0.025;
+    vp.y += ((height / 2 - (mouse.y - height / 2)) - vp.y) * 0.025;
+    bounds = {
+        x: { min: -vp.x, max: width - vp.x },
+        y: { min: -vp.y, max: height - vp.y },
+        z: { min: -fl, max: 1000 }
+    };
+
+    if (points.length < count) {
+        points.push(resetPoint({}));
+    }
+    var i = points.length;
+    while (i--) {
+        var p = points[i];
+        p.vx += p.ax;
+        p.vy += p.ay;
+        p.vz += p.az;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.z += p.vz;
+        if (mouse.down) {
+            p.az = -0.5;
+        }
+        if (options.isanimate) {
+          p.az = 0;
+          ctx.lineWidth = 2;
+        } else {
+          p.az = 0.01;
+          ctx.lineWidth = 0.1;
+        }        
+        if (
+            p.sx - p.sr > bounds.x.max ||
+            p.sy - p.sr > bounds.y.max ||
+            p.z > bounds.z.max ||
+            p.sx + p.sr < bounds.x.min ||
+            p.sy + p.sr < bounds.y.min ||
+            p.z < bounds.z.min
+        ) {
+            resetPoint(p);
+        }
+        p.ox = p.x;
+        p.oy = p.y;
+        p.oz = p.z;
+        p.os = p.s;
+        p.osx = p.sx;
+        p.osy = p.sy;
+    }
+}
+
+function render() {
+    ctx.save();
+    ctx.translate(vp.x, vp.y);
+    ctx.clearRect(-vp.x, -vp.y, width, height);
+    var i = points.length;
+    while (i--) {
+        var p = points[i];
+        p.s = fl / (fl + p.z);
+        p.sx = p.x * p.s;
+        p.sy = p.y * p.s;
+        p.alpha = (bounds.z.max - p.z) / (bounds.z.max / 2);
+        ctx.beginPath();
+        ctx.moveTo(p.sx, p.sy);
+        ctx.lineTo(p.osx, p.osy);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'hsla(' + p.hue + ', 100%, ' + p.lightness + '%, ' + p.alpha + ')';
+        ctx.stroke();
+    }
+    ctx.restore();
+}
+
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    canvasOffset = { x: canvas.offsetLeft, y: canvas.offsetTop };
+}
+
+function mousemove(e) {
+    mouse.x = e.pageX - canvasOffset.x;
+    mouse.y = e.pageY - canvasOffset.y;
+}
+
+function mousedown() {
+    mouse.down = true;
+}
+
+function mouseup() {
+    mouse.down = false;
+}
+
+function loop() {
+    requestAnimationFrame(loop);
+    update();
+    render();
+    tick++;
+}
+
+canvas.style.backgroundColor = 'transparent';
+canvas.style.position = 'absolute';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.pointerEvents = 'none';
+
+window.addEventListener('resize', resize);
+document.body.insertBefore(canvas, document.body.firstChild);
+document.body.addEventListener('mousemove', mousemove);
+// document.body.addEventListener('mousedown', mousedown);
+// document.body.addEventListener('mouseup', mouseup);
+
+resize();
+create();
+loop();
+
+const button = document.getElementById('toggleButton');
+const svg1 = document.getElementById('svg1');
+const svg2 = document.getElementById('svg2');
+
+button.addEventListener('click', () => {
+    options.isanimate = !options.isanimate;
+
+    // Toggle SVGs based on the state of options.isanimate
+    if (options.isanimate) {
+        svg2.classList.add('hidden');
+        svg1.classList.remove('hidden');
+        startSpeed = -50;
+        resize();
+        loop();
+    } else {
+      resize();
+      loop();
+        svg2.classList.remove('hidden');
+        svg1.classList.add('hidden');
+        startSpeed = 0;
+    }
+});
