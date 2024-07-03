@@ -13,10 +13,11 @@ html {
   font-style: normal;
   cursor: grab;
   overflow: hidden;
+  background: #191b25;
 }
 
 #world {
-  background: black;
+  background: #191b25;
 }
 
 canvas {
@@ -102,10 +103,6 @@ svg {
   justify-content: center;
 }
 
-#toggleButton:hover {
-  /* background-color: #fff;
-  color: #191b25; */
-}
 
 /* Hide SVG by default */
 .hidden {
