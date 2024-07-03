@@ -525,7 +525,7 @@ function planeback() {
     fragmentShader: fragPlaneback,
     vertexShader: vert,
     transparent: true,
-    depthWrite: true,
+    depthWrite: false,
   });
   backcard = new THREE.Mesh(geometry, backmaterial);
   backcard.rotation.set(0, Math.PI, 0);
