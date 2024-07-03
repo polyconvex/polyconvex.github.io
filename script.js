@@ -350,11 +350,9 @@ function init() {
   cameraRTT.position.y = 0;
 
   scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x191b25);
   sceneRTT = new THREE.Scene();
   sceneRTT.background = new THREE.Color(0x000000);
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // White light, 50% intensity
-scene.add(ambientLight);
 
   renderer = new THREE.WebGLRenderer({ antialias: true, autoSize: true });
   renderer.setPixelRatio(2);
