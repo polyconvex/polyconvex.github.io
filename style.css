@@ -259,6 +259,16 @@ p {
   font-weight: bold;
 }
 
+/* Remove the border from the last row */
+.card-stats table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Remove the border from the last cell of the last row */
+.card-stats table tr:last-child td:last-child {
+  border-bottom: none;
+}
+
 @media (max-width: 600px) {
   .card-stats table {
     display: block; /* Enable block display for the table */
