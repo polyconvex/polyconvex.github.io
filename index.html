@@ -14,11 +14,21 @@
 <div id="world"></div>
 <!-- partial -->
 
-<a href="#popup1" ><button class="info-button">INFO</button></a>
+<a href="#popup1" ><button class="info-button">CARD STATS</button></a>
 
-<h1 class="heading">Collectible $DAG card #1</h1>
+<h1 class="heading">Collectible card #1</h1>
 
 <a class="vote" href="https://x.com/polyconvex"><span class="underline">Vote</span> for this project in the Constellation Fund!</a>
+
+<button id="toggleButton">
+  <div class="svg-container">
+    <svg id="svg1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112V400c0 26.5 21.5 48 48 48H80c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zm192 0c-26.5 0-48 21.5-48 48V400c0 26.5 21.5 48 48 48h32c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H240z"/></svg>
+    <svg id="svg2" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>
+  </div>  
+</button>
+
+
+
 
 <div id="popup1" class="overlay">
   <a class="cancel" href="#"></a>
@@ -27,11 +37,90 @@
   <a class="close" href="#">&times;</a>
   <div class="content">
     <div>
-      <p><strong>Type:</strong> Blue supergiant star</p>
-      <p><strong>Location:</strong> Constellation Orion</p>
-      <p><strong>Temperature:</strong> Around 11,000 to 12,000 Kelvin</p>
       <p><strong>Description:</strong> This is the brightest star in the constellation Orion.<br><br>Its blue-white color is a result of its high surface temperature, following Wien's displacement law, which states that the peak wavelength of a black body radiation curve is inversely proportional to its temperature.<br><br>Hotter stars emit more light at shorter wavelengths, which corresponds to blue and white light.</p>
     </div>
+      <div class="card-stats">
+        <table>
+          <tr>
+            <td>Rarity</td>
+            <td>Legendary</td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td>$DAG Supergiant</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>Blue supergiant star</td>
+          </tr> 
+          <tr>
+            <td>Location</td>
+            <td>Constellation Orion</td>
+          </tr>          
+          <tr>                      
+          <tr>            
+            <td>Category</td>
+            <td>Celestial Phenomenon</td>
+          </tr>
+          <tr>
+            <td>Temperature</td>
+            <td>Around 11,000 - 12,000 Kelvin</td>
+          </tr>
+          <tr>
+            <td>Color</td>
+            <td>Blue-White</td>
+          </tr>
+          <tr>
+            <td>Magnitude</td>
+            <td>-7.0</td>
+          </tr>
+          <tr>
+            <td>Luminosity</td>
+            <td>~100,000 times that of the Sun</td>
+          </tr>
+          <tr>
+            <td>Size</td>
+            <td>~10 - 20 times the diameter of the Sun</td>
+          </tr>
+          <tr>
+            <td>Age</td>
+            <td>1 - 5 million years</td>
+          </tr>
+          <tr>
+            <td>Spectral Class</td>
+            <td>B0 - B2</td>
+          </tr>
+          <tr>
+            <td>Distance from Earth</td>
+            <td>~1,500 light-years</td>
+          </tr>
+          <tr>
+            <td>Surface Gravity</td>
+            <td><span>10<sup>4</sup> - 10<sup>5</sup> m/s²</span></td>
+          </tr>
+          <tr>
+            <td>Brightness</td>
+            <td>Absolute Magnitude: -6.0</td>
+          </tr>
+          <tr>
+            <td>Habitat</td>
+            <td>Stellar Nursery</td>
+          </tr>
+          <tr>
+            <td>Special Ability</td>
+            <td class="special-ability">Celestial Beacon: Provides light and energy to nearby celestial objects and influences cosmic events.</td>
+          </tr>
+          <tr>
+            <td>Legendary Trait</td>
+            <td>Herculean Radiance: Unmatched luminosity among stars in the Orion constellation.</td>
+          </tr>
+          <tr>
+            <td>Historical Fact</td>
+            <td>This star is a key marker in the night sky for navigators and stargazers throughout history.</td>
+          </tr>
+        </table>
+      </div>
+
   </div>
 </div>
 </div>
