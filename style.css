@@ -225,7 +225,7 @@ p {
 .popup .content {
   overflow-y: scroll;
   height: 100%;
-  max-height: calc(100vh - 180px); /* Adjust padding value */
+  max-height: 550px;
   width: 100%;
 }
 .popup p {
