@@ -194,11 +194,10 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
+  overflow: auto;
 }
 
 .popup svg {
-
   fill: #191b25;
 }
 
@@ -224,10 +223,9 @@ p {
   opacity: 1;
 }
 .popup .content {
-  overflow: auto;
   overflow-y: scroll;
   height: 100%;
-  max-height: 900px;
+  max-height: calc(100vh - 180px); /* Adjust padding value */
   width: 100%;
 }
 .popup p {
@@ -241,7 +239,8 @@ p {
   border-radius: 8px;
   font-size: 11px;
   letter-spacing: 1px;
-  padding-top: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .card-stats table {
