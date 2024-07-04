@@ -310,8 +310,6 @@ function init() {
     1,
     10000
   );
-  // cameraRTT.position.z = 70;
-  // cameraRTT.position.y = -14.5;
   cameraRTT.position.z = 33;
   cameraRTT.position.y = 0;
 
@@ -355,8 +353,7 @@ function init() {
 
 function background() {
   const textureURL = "cosmos.jpg";
-  const brightness = 1; // Adjust the brightness factor (1.0 is the original brightness)
-
+ 
   // Create the sphere geometry
   const sphereGeometry = new THREE.SphereGeometry(80, 80, 80);
 
@@ -628,14 +625,14 @@ function handleResize() {
 window.addEventListener("load", init, false);
 window.addEventListener("resize", handleResize, false);
 
-//
+// paerticles
 
 var canvas = document.createElement("canvas"),
   ctx = canvas.getContext("2d"),
   fl = 3000,
   count = 200,
   points = [],
-  startSpeed = -49,
+  startSpeed = -40,
   tick = 0,
   width,
   height,
@@ -847,10 +844,8 @@ button.addEventListener("click", () => {
     svg1.classList.remove("hidden");
     startSpeed = -50;
     resize();
-    loop();
   } else {
     resize();
-    loop();
     svg2.classList.remove("hidden");
     svg1.classList.add("hidden");
     startSpeed = 0;
@@ -859,14 +854,18 @@ button.addEventListener("click", () => {
 
 // script.js
 
-window.addEventListener("load", function () {
-  // const loadingOverlay = document.getElementById('loading-overlay');
-  // loadingOverlay.classList.add('hidden');
-  // options.isanimate = true;
-});
+// window.addEventListener("load", function () {
+//   // const loadingOverlay = document.getElementById('loading-overlay');
+//   // loadingOverlay.classList.add('hidden');
+//   // options.isanimate = true;
+// });
 
 function loadAll() {
   const loadingOverlay = document.getElementById("loading-overlay");
   loadingOverlay.classList.add("hidden");
-  options.isanimate = true;
+
+  setTimeout(() => {
+    options.isanimate = true;
+  }, "666");
+
 }
