@@ -354,6 +354,7 @@ function init() {
   planeback();
   loadskull();
   animate();
+  loadAll();
 }
 
 function background() {
@@ -853,9 +854,13 @@ button.addEventListener('click', () => {
 // script.js
 
 window.addEventListener('load', function() {
+  // const loadingOverlay = document.getElementById('loading-overlay');
+  // loadingOverlay.classList.add('hidden');
+  // options.isanimate = true;
+});
+
+function loadAll() {
   const loadingOverlay = document.getElementById('loading-overlay');
   loadingOverlay.classList.add('hidden');
   options.isanimate = true;
-
-});
-
+}
