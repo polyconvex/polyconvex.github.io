@@ -249,7 +249,7 @@ const fragskull = `
       void main() {
         vec2 olduv = gl_FragCoord.xy/resolution.xy ;
         float f = Fresnel(eyeVector, vNormal);
-        float gradient2 = (f)*(.93 - vPosition.y) ;
+        float gradient2 = (f)*(.3 - vPosition.y) ;
         float scale = 4.;
         // olduv *= 0.5;
         // olduv.y -= 0.5; 
@@ -269,7 +269,7 @@ const fragskull = `
         fresnelTerm = clamp( 1. - fresnelTerm, 0., 1.) ;
 
         vec3 color = vec3(noise) + gradient;
-        vec3 color2 = color - 0.3;
+        vec3 color2 = color - 0.2;
 
 
         float noisetone = setOpacity(color.r,color.g,color.b);
