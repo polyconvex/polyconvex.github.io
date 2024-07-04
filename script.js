@@ -861,11 +861,14 @@ button.addEventListener("click", () => {
 // });
 
 function loadAll() {
-  const loadingOverlay = document.getElementById("loading-overlay");
-  loadingOverlay.classList.add("hidden");
+
+  setTimeout(() => {
+    const loadingOverlay = document.getElementById("loading-overlay");
+    loadingOverlay.classList.add("hidden");
+  }, "300");
 
   setTimeout(() => {
     options.isanimate = true;
-  }, "666");
+  }, "966");
 
 }
