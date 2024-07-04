@@ -38,10 +38,6 @@ var options = {
   isanimate: false,
 };
 
-
-
-
-
 const vert = `
   varying vec2 vUv;
   varying vec3 camPos;
@@ -359,7 +355,7 @@ function init() {
 
 function background() {
   const textureURL = "cosmos.jpg";
-  const brightness = 1;  // Adjust the brightness factor (1.0 is the original brightness)
+  const brightness = 1; // Adjust the brightness factor (1.0 is the original brightness)
 
   // Create the sphere geometry
   const sphereGeometry = new THREE.SphereGeometry(80, 80, 80);
@@ -368,8 +364,8 @@ function background() {
   const textureLoader = new THREE.TextureLoader();
   textureLoader.load(textureURL, (texture) => {
     // Set texture encoding and properties
-    texture.encoding = THREE.sRGBEncoding;  // Ensure correct gamma correction for textures
-    texture.anisotropy = 16;  // Increase if texture appears blurry
+    texture.encoding = THREE.sRGBEncoding; // Ensure correct gamma correction for textures
+    texture.anisotropy = 16; // Increase if texture appears blurry
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
     texture.magFilter = THREE.LinearFilter;
@@ -388,8 +384,6 @@ function background() {
     scene.add(sphere);
   });
 }
-
-
 
 function plane() {
   var geometry = new THREE.PlaneGeometry(20, 30);
@@ -432,7 +426,6 @@ function plane() {
   frontcard = new THREE.Mesh(geometry, frontmaterial);
   scene.add(frontcard);
 }
-
 
 function planeback() {
   var geometry = new THREE.PlaneGeometry(20, 30);
@@ -501,7 +494,6 @@ function loadskull() {
     // depthWrite: false,
   });
 
- 
   basicmat = new THREE.MeshBasicMaterial();
   basicmat.color.setRGB(...options.color2);
 
@@ -510,8 +502,8 @@ function loadskull() {
   var objloader = new OBJLoader();
   objloader.load(skullmodel, function (object) {
     var mesh2 = object.clone();
-    mesh2.position.set(0, 0, -3);
-   
+    mesh2.position.set(0, 0, -4);
+
     mesh2.rotation.set(Math.PI, 0, Math.PI);
 
     mesh2.children.forEach((val, key) => {
@@ -527,7 +519,7 @@ function loadskull() {
         child.material.flatShading = THREE.SmoothShading;
         child.geometry.computeVertexNormals();
       });
-      mesh2.scale.set(0.2, 0.2, 0.2);
+      mesh2.scale.set(0.22, 0.22, 0.22);
 
       modelgroup.add(mesh2);
       sceneRTT.add(modelgroup);
@@ -549,41 +541,34 @@ let ParentQuaternion = new THREE.Quaternion();
 let childQuaternion = new THREE.Quaternion();
 
 let offsetMatrix = new THREE.Matrix4();
-let offsetVector = new THREE.Vector3(0, 0, -3); // Offset for the modelgroup
+let offsetVector = new THREE.Vector3(0, 0, -4); // Offset for the modelgroup
 
 function updateDraw(deltaTime) {
- 
-  ParentQuaternion = camera.quaternion;
   ParentQuaternion.copy(camera.quaternion);
-  
- // Create a transformation matrix for the offset
- offsetMatrix.makeRotationFromQuaternion(ParentQuaternion);
- offsetMatrix.setPosition(offsetVector);
 
- // Apply the offset transformation to the modelgroup
- modelgroup.position.set(0, 0, 0); // Reset position
- modelgroup.applyMatrix4(offsetMatrix);
+  // Create a transformation matrix for the offset
+  offsetMatrix.makeRotationFromQuaternion(ParentQuaternion);
+  offsetMatrix.setPosition(offsetVector);
 
- // Apply the inverse rotation to the modelgroup
- childQuaternion.copy(ParentQuaternion);
- childQuaternion.inverse();
- modelgroup.setRotationFromQuaternion(childQuaternion);
+  // Apply the offset transformation to the modelgroup
+  modelgroup.position.set(0, 0, 0); // Reset position
+  modelgroup.applyMatrix4(offsetMatrix);
+
+  // Apply the inverse rotation to the modelgroup
+  childQuaternion.copy(ParentQuaternion);
+  childQuaternion.inverse();
+  modelgroup.setRotationFromQuaternion(childQuaternion);
 
   if (options.isanimate) {
     if (!clock.running) {
       clock.start();
-      
+
       if (pausedCameraY !== null) {
         // Update the matrix with the stored Y position
-        matrix.set(
-          1, 0, 0, 0,
-          0, 1, 0, pausedCameraY,
-          0, 0, 1, 0,
-          0, 0, 0, 1
-        );
+        matrix.set(1, 0, 0, 0, 0, 1, 0, pausedCameraY, 0, 0, 1, 0, 0, 0, 0, 1);
         pausedCameraY = null;
       }
-      
+
       clock.startTime += pausedTime * 1000;
     }
 
@@ -627,7 +612,7 @@ function handleResize() {
   camera.updateProjectionMatrix();
 
   cameraRTT.aspect = window.innerWidth / window.innerHeight;
-  cameraRTT.updateProjectionMatrix();  
+  cameraRTT.updateProjectionMatrix();
 
   frontcard.material.uniforms.resolution.value = new THREE.Vector2(
     window.innerWidth,
@@ -643,205 +628,205 @@ function handleResize() {
 window.addEventListener("load", init, false);
 window.addEventListener("resize", handleResize, false);
 
-
 //
 
-var canvas = document.createElement('canvas'),
-    ctx = canvas.getContext('2d'),
-    fl = 3000,
-    count = 200,
-    points = [],
-    startSpeed = -49,
-    tick = 0,
-    width,
-    height,
-    bounds,
-    vp,
-    mouse,
-    canvasOffset;
+var canvas = document.createElement("canvas"),
+  ctx = canvas.getContext("2d"),
+  fl = 3000,
+  count = 200,
+  points = [],
+  startSpeed = -49,
+  tick = 0,
+  width,
+  height,
+  bounds,
+  vp,
+  mouse,
+  canvasOffset;
 
 function rand(min, max) {
-    return Math.random() * (max - min) + min;
+  return Math.random() * (max - min) + min;
 }
 
 function norm(val, min, max) {
-    return (val - min) / (max - min);
+  return (val - min) / (max - min);
 }
 
 function resetPoint(p, init) {
-    p.z = init ? rand(0, bounds.z.max) : bounds.z.max;
-    p.x = rand(bounds.x.min, bounds.x.max) / (fl / (fl + p.z));
-    p.y = rand(bounds.y.min, bounds.y.max) / (fl / (fl + p.z));
-    p.ox = p.x;
-    p.oy = p.y;
-    p.oz = p.z;
-    p.vx = 0;
-    p.vy = 0;
-    p.vz = rand(-1, -6) + startSpeed;
-    p.ax = 0;
-    p.ay = 0;
-    p.az = 0;
-    p.s = 0;
-    p.sx = 0;
-    p.sy = 0;
-    p.os = p.s;
-    p.osx = p.sx;
-    p.osy = p.sy;
-    p.hue = rand(255, 255);
-    p.lightness = rand(70, 100);
-    p.alpha = 0;
-    return p;
+  p.z = init ? rand(0, bounds.z.max) : bounds.z.max;
+  p.x = rand(bounds.x.min, bounds.x.max) / (fl / (fl + p.z));
+  p.y = rand(bounds.y.min, bounds.y.max) / (fl / (fl + p.z));
+  p.ox = p.x;
+  p.oy = p.y;
+  p.oz = p.z;
+  p.vx = 0;
+  p.vy = 0;
+  p.vz = rand(-1, -6) + startSpeed;
+  p.ax = 0;
+  p.ay = 0;
+  p.az = 0;
+  p.s = 0;
+  p.sx = 0;
+  p.sy = 0;
+  p.os = p.s;
+  p.osx = p.sx;
+  p.osy = p.sy;
+  p.hue = rand(255, 255);
+  p.lightness = rand(70, 100);
+  p.alpha = 0;
+  return p;
 }
 
 function create() {
-    vp = {
-        x: width / 2,
-        y: height / 2
-    };
-    mouse = {
-        x: vp.x,
-        y: vp.y,
-        down: false
-    };
-    bounds = {
-        x: { min: -vp.x, max: width - vp.x },
-        y: { min: -vp.y, max: height - vp.y },
-        z: { min: -fl, max: 1000 }
-    };
+  vp = {
+    x: width / 2,
+    y: height / 2,
+  };
+  mouse = {
+    x: vp.x,
+    y: vp.y,
+    down: false,
+  };
+  bounds = {
+    x: { min: -vp.x, max: width - vp.x },
+    y: { min: -vp.y, max: height - vp.y },
+    z: { min: -fl, max: 1000 },
+  };
 }
 
 function update() {
-    if (mouse.down) {
-        if (startSpeed > -30) {
-            startSpeed -= 0.1;
-        } else {
-            startSpeed = -30;
-        }
+  if (mouse.down) {
+    if (startSpeed > -30) {
+      startSpeed -= 0.1;
     } else {
-        if (startSpeed < 0) {
-            startSpeed += 1;
-        } else {
-            startSpeed = 0;
-        }
+      startSpeed = -30;
     }
-
-    if (!options.isanimate) {
-      if (startSpeed > -20) {
-          startSpeed -= 0.1;
-      } else {
-          startSpeed = -20;
-      }
   } else {
-      if (startSpeed < 0) {
-          startSpeed += 1;
-      } else {
-          startSpeed = 0;
-      }
-  }    
-
-    vp.x += ((width / 2 - (mouse.x - width / 2)) - vp.x) * 0.025;
-    vp.y += ((height / 2 - (mouse.y - height / 2)) - vp.y) * 0.025;
-    bounds = {
-        x: { min: -vp.x, max: width - vp.x },
-        y: { min: -vp.y, max: height - vp.y },
-        z: { min: -fl, max: 1000 }
-    };
-
-    if (points.length < count) {
-        points.push(resetPoint({}));
+    if (startSpeed < 0) {
+      startSpeed += 1;
+    } else {
+      startSpeed = 0;
     }
-    var i = points.length;
-    while (i--) {
-        var p = points[i];
-        p.vx += p.ax;
-        p.vy += p.ay;
-        p.vz += p.az;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.z += p.vz;
-        if (mouse.down) {
-            p.az = -0.5;
-        }
-        if (options.isanimate) {
-          p.az = 0;
-        } else {
-          p.az = 0.01;
-        }        
-        if (
-            p.sx - p.sr > bounds.x.max ||
-            p.sy - p.sr > bounds.y.max ||
-            p.z > bounds.z.max ||
-            p.sx + p.sr < bounds.x.min ||
-            p.sy + p.sr < bounds.y.min ||
-            p.z < bounds.z.min
-        ) {
-            resetPoint(p);
-        }
-        p.ox = p.x;
-        p.oy = p.y;
-        p.oz = p.z;
-        p.os = p.s;
-        p.osx = p.sx;
-        p.osy = p.sy;
+  }
+
+  if (!options.isanimate) {
+    if (startSpeed > -20) {
+      startSpeed -= 0.1;
+    } else {
+      startSpeed = -20;
     }
+  } else {
+    if (startSpeed < 0) {
+      startSpeed += 1;
+    } else {
+      startSpeed = 0;
+    }
+  }
+
+  vp.x += (width / 2 - (mouse.x - width / 2) - vp.x) * 0.025;
+  vp.y += (height / 2 - (mouse.y - height / 2) - vp.y) * 0.025;
+  bounds = {
+    x: { min: -vp.x, max: width - vp.x },
+    y: { min: -vp.y, max: height - vp.y },
+    z: { min: -fl, max: 1000 },
+  };
+
+  if (points.length < count) {
+    points.push(resetPoint({}));
+  }
+  var i = points.length;
+  while (i--) {
+    var p = points[i];
+    p.vx += p.ax;
+    p.vy += p.ay;
+    p.vz += p.az;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.z += p.vz;
+    if (mouse.down) {
+      p.az = -0.5;
+    }
+    if (options.isanimate) {
+      p.az = 0;
+    } else {
+      p.az = 0.01;
+    }
+    if (
+      p.sx - p.sr > bounds.x.max ||
+      p.sy - p.sr > bounds.y.max ||
+      p.z > bounds.z.max ||
+      p.sx + p.sr < bounds.x.min ||
+      p.sy + p.sr < bounds.y.min ||
+      p.z < bounds.z.min
+    ) {
+      resetPoint(p);
+    }
+    p.ox = p.x;
+    p.oy = p.y;
+    p.oz = p.z;
+    p.os = p.s;
+    p.osx = p.sx;
+    p.osy = p.sy;
+  }
 }
 
 function render() {
-    ctx.save();
-    ctx.translate(vp.x, vp.y);
-    ctx.clearRect(-vp.x, -vp.y, width, height);
-    var i = points.length;
-    while (i--) {
-        var p = points[i];
-        p.s = fl / (fl + p.z);
-        p.sx = p.x * p.s;
-        p.sy = p.y * p.s;
-        p.alpha = (bounds.z.max - p.z) / (bounds.z.max / 2);
-        ctx.beginPath();
-        ctx.moveTo(p.sx, p.sy);
-        ctx.lineTo(p.osx, p.osy);
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = 'hsla(' + p.hue + ', 100%, ' + p.lightness + '%, ' + p.alpha + ')';
-        ctx.stroke();
-    }
-    ctx.restore();
+  ctx.save();
+  ctx.translate(vp.x, vp.y);
+  ctx.clearRect(-vp.x, -vp.y, width, height);
+  var i = points.length;
+  while (i--) {
+    var p = points[i];
+    p.s = fl / (fl + p.z);
+    p.sx = p.x * p.s;
+    p.sy = p.y * p.s;
+    p.alpha = (bounds.z.max - p.z) / (bounds.z.max / 2);
+    ctx.beginPath();
+    ctx.moveTo(p.sx, p.sy);
+    ctx.lineTo(p.osx, p.osy);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle =
+      "hsla(" + p.hue + ", 100%, " + p.lightness + "%, " + p.alpha + ")";
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    canvasOffset = { x: canvas.offsetLeft, y: canvas.offsetTop };
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  canvasOffset = { x: canvas.offsetLeft, y: canvas.offsetTop };
 }
 
 function mousemove(e) {
-    mouse.x = e.pageX - canvasOffset.x;
-    mouse.y = e.pageY - canvasOffset.y;
+  mouse.x = e.pageX - canvasOffset.x;
+  mouse.y = e.pageY - canvasOffset.y;
 }
 
 function mousedown() {
-    mouse.down = true;
+  mouse.down = true;
 }
 
 function mouseup() {
-    mouse.down = false;
+  mouse.down = false;
 }
 
 function loop() {
-    requestAnimationFrame(loop);
-    update();
-    render();
-    tick++;
+  requestAnimationFrame(loop);
+  update();
+  render();
+  tick++;
 }
 
-canvas.style.backgroundColor = 'transparent';
-canvas.style.position = 'absolute';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.pointerEvents = 'none';
+canvas.style.backgroundColor = "transparent";
+canvas.style.position = "absolute";
+canvas.style.top = "0";
+canvas.style.left = "0";
+canvas.style.pointerEvents = "none";
 
-window.addEventListener('resize', resize);
+window.addEventListener("resize", resize);
 document.body.insertBefore(canvas, document.body.firstChild);
-document.body.addEventListener('mousemove', mousemove);
+document.body.addEventListener("mousemove", mousemove);
 // document.body.addEventListener('mousedown', mousedown);
 // document.body.addEventListener('mouseup', mouseup);
 
@@ -849,39 +834,39 @@ resize();
 create();
 loop();
 
-const button = document.getElementById('toggleButton');
-const svg1 = document.getElementById('svg1');
-const svg2 = document.getElementById('svg2');
+const button = document.getElementById("toggleButton");
+const svg1 = document.getElementById("svg1");
+const svg2 = document.getElementById("svg2");
 
-button.addEventListener('click', () => {
-    options.isanimate = !options.isanimate;
+button.addEventListener("click", () => {
+  options.isanimate = !options.isanimate;
 
-    // Toggle SVGs based on the state of options.isanimate
-    if (options.isanimate) {
-        svg2.classList.add('hidden');
-        svg1.classList.remove('hidden');
-        startSpeed = -50;
-        resize();
-        loop();
-    } else {
-      resize();
-      loop();
-        svg2.classList.remove('hidden');
-        svg1.classList.add('hidden');
-        startSpeed = 0;
-    }
+  // Toggle SVGs based on the state of options.isanimate
+  if (options.isanimate) {
+    svg2.classList.add("hidden");
+    svg1.classList.remove("hidden");
+    startSpeed = -50;
+    resize();
+    loop();
+  } else {
+    resize();
+    loop();
+    svg2.classList.remove("hidden");
+    svg1.classList.add("hidden");
+    startSpeed = 0;
+  }
 });
 
 // script.js
 
-window.addEventListener('load', function() {
+window.addEventListener("load", function () {
   // const loadingOverlay = document.getElementById('loading-overlay');
   // loadingOverlay.classList.add('hidden');
   // options.isanimate = true;
 });
 
 function loadAll() {
-  const loadingOverlay = document.getElementById('loading-overlay');
-  loadingOverlay.classList.add('hidden');
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.classList.add("hidden");
   options.isanimate = true;
 }
