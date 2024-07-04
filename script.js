@@ -545,8 +545,29 @@ var period = 5;
 var clock = new THREE.Clock();
 var pausedCameraY = null;
 
+let ParentQuaternion = new THREE.Quaternion();
+let childQuaternion = new THREE.Quaternion();
+
+let offsetMatrix = new THREE.Matrix4();
+let offsetVector = new THREE.Vector3(0, 0, -3); // Offset for the modelgroup
+
 function updateDraw(deltaTime) {
-  modelgroup.rotation.set(-camera.rotation._x, -camera.rotation._y, 0);
+ 
+  ParentQuaternion = camera.quaternion;
+  ParentQuaternion.copy(camera.quaternion);
+  
+ // Create a transformation matrix for the offset
+ offsetMatrix.makeRotationFromQuaternion(ParentQuaternion);
+ offsetMatrix.setPosition(offsetVector);
+
+ // Apply the offset transformation to the modelgroup
+ modelgroup.position.set(0, 0, 0); // Reset position
+ modelgroup.applyMatrix4(offsetMatrix);
+
+ // Apply the inverse rotation to the modelgroup
+ childQuaternion.copy(ParentQuaternion);
+ childQuaternion.inverse();
+ modelgroup.setRotationFromQuaternion(childQuaternion);
 
   if (options.isanimate) {
     if (!clock.running) {
