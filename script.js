@@ -380,31 +380,6 @@ function background() {
       side: THREE.BackSide,
     });
 
-    // Adjust the brightness by modifying the texture's color
-    texture.onUpdate = () => {
-      texture.needsUpdate = true;
-    };
-    
-    // Apply brightness adjustment using a temporary canvas
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = texture.image.width;
-    canvas.height = texture.image.height;
-    ctx.drawImage(texture.image, 0, 0);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-
-    // Modify brightness
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] *= brightness;     // Red
-      data[i + 1] *= brightness; // Green
-      data[i + 2] *= brightness; // Blue
-    }
-
-    ctx.putImageData(imageData, 0, 0);
-    texture.image = canvas;
-    texture.needsUpdate = true;
-
     // Create the sphere mesh
     const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
@@ -499,9 +474,7 @@ function planeback() {
   backcard.rotation.set(0, Math.PI, 0);
   scene.add(backcard);
 }
-var eye,
-  eye2,
-  basicmat,
+var basicmat,
   skullmaterial,
   modelgroup = new THREE.Group();
 
@@ -527,16 +500,12 @@ function loadskull() {
     // depthWrite: false,
   });
 
-  var spheregeo = new THREE.SphereGeometry(1.5, 32, 32);
+ 
   basicmat = new THREE.MeshBasicMaterial();
   basicmat.color.setRGB(...options.color2);
-  eye = new THREE.Mesh(spheregeo, basicmat);
-  eye2 = new THREE.Mesh(spheregeo, basicmat);
-  eye.position.set(-992.2, -2.2, -6.6);
-  eye2.position.set(992.2, -2.2, -6.6);
+
   modelgroup = new THREE.Object3D();
-  modelgroup.add(eye);
-  modelgroup.add(eye2);
+
   var objloader = new OBJLoader();
   objloader.load(skullmodel, function (object) {
     var mesh2 = object.clone();
@@ -622,8 +591,6 @@ function updateDraw(deltaTime) {
     skullmaterial.uniforms.time.value = deltaTime / 4000;
     skullmaterial.uniforms.color1.value = new THREE.Vector3(...options.color1);
     skullmaterial.uniforms.color0.value = new THREE.Vector3(...options.color0);
-    eye2.material.color.setRGB(...options.color2);
-    eye.material.color.setRGB(...options.color2);
   }
 }
 
