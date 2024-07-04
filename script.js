@@ -35,7 +35,7 @@ var options = {
   color0: [0, 31, 255],
   color1: [69, 69, 194],
   color2: [0, 150, 255],
-  isanimate: true,
+  isanimate: false,
 };
 
 
@@ -662,7 +662,7 @@ var canvas = document.createElement('canvas'),
     fl = 3000,
     count = 200,
     points = [],
-    startSpeed = -80,
+    startSpeed = -49,
     tick = 0,
     width,
     height,
@@ -882,3 +882,13 @@ button.addEventListener('click', () => {
         startSpeed = 0;
     }
 });
+
+// script.js
+
+window.addEventListener('load', function() {
+  const loadingOverlay = document.getElementById('loading-overlay');
+  loadingOverlay.classList.add('hidden');
+  options.isanimate = true;
+
+});
+
