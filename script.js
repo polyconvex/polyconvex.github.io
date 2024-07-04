@@ -84,7 +84,7 @@ const fragPlane = `
     vec4 noisetex = texture2D( noise, mod(vUv*2.,1.));
     if(gl_FragColor.g >= .5 && gl_FragColor.r < 0.6){
       gl_FragColor = f + skulltex;
-      gl_FragColor += noisetex/7.;
+      gl_FragColor += noisetex/6.;
 
     } else {
       vec4 bactex = texture2D( backtexture, vUv);
