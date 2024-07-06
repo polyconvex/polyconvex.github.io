@@ -16,6 +16,14 @@ html {
   background: #191b25;
 }
 
+button, input, a, p, div {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
 #world {
   background: #191b25;
 }
@@ -56,11 +64,7 @@ canvas {
   color: #191b25;
 }
 
-#toggleButton {
-  font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+.toggleButton {
   cursor: pointer;
   position: absolute;
   top: 48px;
@@ -79,13 +83,94 @@ canvas {
   justify-content: center;
 }
 
-#toggleButton:hover {
+.toggleButton:hover {
   background-color: #fff;
   color: #191b25;
 }
 
-#toggleButton:hover svg {
+.toggleButton:hover svg {
   fill: #191b25;
+}
+
+.toggleButton.left {
+  right: auto;
+  left: 24px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.styled-input {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  height: 48px;
+  width: 100%;
+  font-size: 12px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.styled-input:focus {
+  border-color: blue;
+  outline: none;
+}
+
+.styled-input:hover {
+  background-color: #f5f5f5;
+}
+
+.styled-input.error {
+  border-color: red;
+}
+
+.clear-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  fill: #191b25;
+  transition: fill 0.2s;
+  display: none;
+}
+
+.clear-icon:hover {
+  fill: #2c2e3a;
+}
+
+.helper-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+  font-size: 11px;
+}
+
+.submit-button {
+  margin-top: 20px;
+  background-color: #191b25;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 999px;
+  height: 48px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  line-height: 48px;
+  box-sizing: border-box;
+}
+
+.submit-button:hover {
+  background-color: white;
+  color: #191b25;
+  border: 1px solid #191b25;
 }
 
 svg {
@@ -157,6 +242,7 @@ p {
   font-weight: 300;
   letter-spacing: 1px;
 }
+
 .overlay {
   position: absolute;
   top: 0;

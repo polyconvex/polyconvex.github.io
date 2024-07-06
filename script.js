@@ -872,3 +872,40 @@ function loadAll() {
   }, "966");
 
 }
+
+document.getElementById('formage').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var input = document.getElementById('textInput');
+  var helperText = document.getElementById('helperText');
+
+  if (input.value.trim() === '') {
+    input.classList.remove('error');
+    helperText.style.display = 'none';
+  } else {
+    input.classList.add('error');
+    helperText.style.display = 'block';
+  }
+});
+
+document.getElementById('textInput').addEventListener('input', function() {
+  var input = document.getElementById('textInput');
+  var helperText = document.getElementById('helperText');
+  var clearIcon = document.getElementById('clearIcon');
+
+  if (input.value.trim() === '') {
+      input.classList.remove('error');
+      helperText.style.display = 'none';
+      clearIcon.style.display = 'none';
+  } else {
+      clearIcon.style.display = 'block';
+  }
+});
+
+document.getElementById('clearIcon').addEventListener('click', function() {
+  var input = document.getElementById('textInput');
+  input.value = '';
+  input.classList.remove('error');
+  document.getElementById('helperText').style.display = 'none';
+  this.style.display = 'none'; // Hide the clear icon
+});
