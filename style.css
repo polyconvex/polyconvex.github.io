@@ -291,7 +291,6 @@ p {
   margin-top: 0;
   margin-bottom: 16px;
   color: #111;
-  max-width: 250px;
 }
 .popup .close {
   position: absolute;
@@ -364,6 +363,12 @@ p {
 }
 
 @media (max-width: 600px) {
+
+  .popup h1 {
+    max-width: 250px;
+  }
+
+
   .card-stats table {
     display: block; /* Enable block display for the table */
   }

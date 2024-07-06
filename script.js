@@ -907,5 +907,5 @@ document.getElementById('clearIcon').addEventListener('click', function() {
   input.value = '';
   input.classList.remove('error');
   document.getElementById('helperText').style.display = 'none';
-  this.style.display = 'none'; // Hide the clear icon
+  this.style.display = 'none'; 
 });
